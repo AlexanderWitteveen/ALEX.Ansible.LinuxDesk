@@ -1,0 +1,68 @@
+---
+
+- name: Install kde
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  when: 'prop_desktop == "kde"'
+  vars:
+    packages:
+    - kde-plasma-desktop 
+    ansible_connection: ssh
+    ansible_host: "{{ prop_ipaddress }}"
+  become: true
+
+- name: Install cinnamon
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  when: 'prop_desktop == "cinnamon"'
+  vars:
+    packages:
+    - task-cinnamon-desktop 
+    ansible_connection: ssh
+    ansible_host: "{{ prop_ipaddress }}"
+  become: true
+
+- name: Install xfce
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  when: 'prop_desktop == "xfce"'
+  vars:
+    packages:
+    - xfce-desktop 
+    ansible_connection: ssh
+    ansible_host: "{{ prop_ipaddress }}"
+  become: true
+
+- name: Install gnome
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  when: 'prop_desktop == "gnome"'
+  vars:
+    packages:
+    - gnome/stable 
+    ansible_connection: ssh
+    ansible_host: "{{ prop_ipaddress }}"
+  become: true
+
+- name: Install i3
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  when: 'prop_desktop == "i3"'
+  vars:
+    packages:
+    - i3 
+    ansible_connection: ssh
+    ansible_host: "{{ prop_ipaddress }}"
+  become: true
+
+
