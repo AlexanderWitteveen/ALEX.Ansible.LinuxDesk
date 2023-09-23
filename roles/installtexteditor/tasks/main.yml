@@ -1,0 +1,50 @@
+---
+
+- name: Install Geany
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - geany
+    ansible_connection: ssh
+    ansible_host: "{{ args_text_ipaddress }}"
+  become: true
+
+- name: Install kate
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - kate
+    ansible_connection: ssh
+    ansible_host: "{{ args_text_ipaddress }}"
+  become: true
+
+- name: Install gedit
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - gedit
+    ansible_connection: ssh
+    ansible_host: "{{ args_text_ipaddress }}"
+  become: true
+
+- name: Install emacs
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - emacs
+    ansible_connection: ssh
+    ansible_host: "{{ args_text_ipaddress }}"
+  become: true
+

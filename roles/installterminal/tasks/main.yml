@@ -1,42 +1,51 @@
 ---
 
-
-- name: Install cinnamon
+- name: Install Kitty Terminal
   apt:
     name: "{{ packages }}"
     state: present
     update_cache: yes
-  when: 'prop_desktop == "cinnamon"'
   vars:
     packages:
-    - task-cinnamon-desktop 
+    - kitty 
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ args_terminal_ipaddress }}"
   become: true
 
-- name: Install xfce
+# TODO Add config file for Kitty
+
+
+
+- name: Install Alactritty Terminal
   apt:
     name: "{{ packages }}"
     state: present
     update_cache: yes
-  when: 'prop_desktop == "xfce"'
   vars:
     packages:
-    - task-xfce-desktop 
+    - alacritty 
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ args_terminal_ipaddress }}"
   become: true
 
-- name: Install gnome
+
+# TODO Add config file for alacritty
+
+
+
+- name: Install Terminator Terminal
   apt:
     name: "{{ packages }}"
     state: present
     update_cache: yes
-  when: 'prop_desktop == "gnome"'
   vars:
     packages:
-    - gnome-core 
+    - terminator 
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ args_terminal_ipaddress }}"
   become: true
+
+
+# TODO Add config file for terminator
+
 

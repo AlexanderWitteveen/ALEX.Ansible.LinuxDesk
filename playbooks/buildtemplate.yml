@@ -7,40 +7,72 @@
   vars_files:
     - /etc/ansible/inventory/vars.yml
 
-  roles:
-    - name: alex.preinstall.knownhost
+  tasks:
+    - ansible.builtin.include_role:
+        name: alex.preinstall.newtemplateinitialize
       vars:
-        args_ipaddress: "{{ prop_proxmox_host }}"
-    - name: alex.proxmox.status
+        args_newtemplateinitialize_host: "{{ prop_proxmox_host }}"
+        args_newtemplateinitialize_local_user_ssh: "{{ prop_local_user_ssh }}"
+        args_newtemplateinitialize_vmid: "{{ prop_proxmox_vmid }}"
+        args_newtemplateinitialize_templateid: "{{ prop_proxmox_template }}"
+        args_newtemplateinitialize_name: "{{ prop_proxmox_name }}"
+        args_newtemplateinitialize_hostname: "{{ prop_hostname }}"
+        args_newtemplateinitialize_description: "{{ prop_description }}"
+        args_newtemplateinitialize_ipaddress: "{{ prop_ipaddress }}"
+        args_newtemplateinitialize_mac: "{{ prop_vm_mac }}"
+        args_newtemplateinitialize_vlan: "{{ prop_vm_vlan }}"
+        args_newtemplateinitialize_mac2: "{{ prop_vm_mac2 | default('0') }}"
+        args_newtemplateinitialize_vlan2: "{{ prop_vm_vlan2 | default('0')}}"
+        args_newtemplateinitialize_memory: "{{ prop_vm_memory }}"
+        args_newtemplateinitialize_cores: "{{ prop_vm_cores }}"
+        args_newtemplateinitialize_start_boot: "{{ prop_vm_start_boot }}"
+
+    - ansible.builtin.include_role:
+        name: alex.linuxdesk.installdesktop
       vars:
-        args_vmid: "{{ prop_proxmox_vmid }}"
-    - name: alex.proxmox.stopvm
-      when: '"RUNNING" in vmstatusresult.stdout'
-    - name: alex.proxmox.removevm
-      when: '"NOTEXIST" not in vmstatusresult.stdout'
-    - name: alex.proxmox.status
+        args_desk_ipaddress: "{{ prop_ipaddress }}"
+
+    - ansible.builtin.include_role:
+        name: alex.linuxdesk.installkde
       vars:
-        prop_vmid: "{{ prop_proxmox_parent_vmid }}"
-      failed_when: '"NOTEXIST" not in vmstatusresult.stdout'
-    - name: alex.proxmox.addvm
+        args_kde_ipaddress: "{{ prop_ipaddress }}"
+      when: 'prop_desktop == "kde"'
+
+    - ansible.builtin.include_role:
+        name: alex.ms.desktop
       vars:
-        args_template: "{{ prop_proxmox_parent_vmid }}"
-    - name: alex.proxmox.startvm
-    - name: alex.preinstall.waitstarted
-    - name: alex.preinstall.knownhost
+        args_desktop_ipaddress: "{{ prop_ipaddress }}"
+
+    - ansible.builtin.include_role:
+        name: alex.linuxdesk.installremotedesktop
       vars:
-        args_ipaddress: "{{ prop_ipaddress }}"
-    - name: alex.preinstall.firstlogon
-    - name: alex.preinstall.knownhost
+        args_remote_ipaddress: "{{ prop_ipaddress }}"
+
+    - ansible.builtin.include_role:
+        name: alex.linuxdesk.installbrowser
       vars:
-        args_ipaddress: "{{ prop_ipaddress }}"
-    - name: alex.preinstall.adduser
-    - name: alex.preinstall.autologon
-    - name: alex.preinstall.sudouser
-    - name: alex.preinstall.remoteinstallpython3
-    - name: alex.preinstall.certificates
-    - name: alex.preinstall.hostname
-    - name: alex.preinstall.aptupgrade
-    - name: alex.preinstall.installdesktop
-    - name: alex.proxmox.shutdownvm
-    - name: alex.proxmox.convert
+        args_browser_ipaddress: "{{ prop_ipaddress }}"
+
+    - ansible.builtin.include_role:
+        name: alex.linuxdesk.installterminal
+      vars:
+        args_terminal_ipaddress: "{{ prop_ipaddress }}"
+
+    - ansible.builtin.include_role:
+        name: alex.linuxdesk.installfilemanager
+      vars:
+        args_file_ipaddress: "{{ prop_ipaddress }}"
+
+    - ansible.builtin.include_role:
+        name: alex.linuxdesk.installtexteditor
+      vars:
+        args_text_ipaddress: "{{ prop_ipaddress }}"
+
+    - ansible.builtin.include_role:
+        name: alex.preinstall.newtemplatefinalize
+      vars:
+        args_newtemplatefinalize_hostname: "{{ prop_hostname }}"
+        args_newtemplatefinalize_ipaddress: "{{ prop_ipaddress }}"
+        args_newtemplatefinalize_vmid: "{{ prop_proxmox_vmid }}"
+        args_newtemplatefinalize_host: "{{ prop_proxmox_host }}"
+

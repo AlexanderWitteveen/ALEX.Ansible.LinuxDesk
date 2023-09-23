@@ -1,0 +1,49 @@
+---
+
+- name: Install kde
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - kde-plasma-desktop 
+    ansible_connection: ssh
+    ansible_host: "{{ args_kde_ipaddress }}"
+  become: true
+
+- name: KDE Powermanagement
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - kde-plasma-desktop
+    ansible_connection: ssh
+    ansible_host: "{{ args_kde_ipaddress }}"
+  become: true
+
+- name: Set Screenlock
+  ansible.builtin.template:
+    src: kscreenlockerrc.j2
+    dest: "/home/{{ args_kde_username }}/.config/kscreenlockerrc"
+    owner: "{{ args_kde_username }}"
+    group: "{{ args_kde_groupname }}"
+    mode: '0400'
+  vars:
+    ansible_connection: ssh
+    ansible_host: "{{ args_kde_ipaddress }}"
+  become: true
+
+- name: Set Powermanagement
+  ansible.builtin.template:
+    src: powermanagementprofilesrc.j2
+    dest: "/home/{{ args_kde_username }}/.config/powermanagementprofilesrc"
+    owner: "{{ args_kde_username }}"
+    group: "{{ args_kde_groupname }}"
+    mode: '0400'
+  vars:
+    ansible_connection: ssh
+    ansible_host: "{{ args_kde_ipaddress }}"
+  become: true

@@ -1,42 +1,40 @@
 ---
 
-
-- name: Install cinnamon
+- name: Install krusader file manager
   apt:
     name: "{{ packages }}"
     state: present
     update_cache: yes
-  when: 'prop_desktop == "cinnamon"'
   vars:
     packages:
-    - task-cinnamon-desktop 
+    - krusader 
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ args_file_ipaddress }}"
   become: true
 
-- name: Install xfce
+- name: Install Dolphin
   apt:
     name: "{{ packages }}"
     state: present
     update_cache: yes
-  when: 'prop_desktop == "xfce"'
   vars:
     packages:
-    - task-xfce-desktop 
+    - dolphin 
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ args_file_ipaddress }}"
   become: true
 
-- name: Install gnome
+- name: Install Thunar
   apt:
     name: "{{ packages }}"
     state: present
     update_cache: yes
-  when: 'prop_desktop == "gnome"'
   vars:
     packages:
-    - gnome-core 
+    - thunar
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ args_file_ipaddress }}"
   become: true
+
+
 

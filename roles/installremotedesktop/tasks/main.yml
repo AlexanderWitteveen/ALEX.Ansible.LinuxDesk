@@ -1,0 +1,26 @@
+---
+
+- name: Install xrdp
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - xrdp 
+    ansible_connection: ssh
+    ansible_host: "{{ args_remote_ipaddress }}"
+  become: true
+
+- name: Install remmina
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - remmina 
+    ansible_connection: ssh
+    ansible_host: "{{ args_remote_ipaddress }}"
+  become: true
+
