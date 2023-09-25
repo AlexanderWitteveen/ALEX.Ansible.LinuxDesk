@@ -1,0 +1,29 @@
+---
+
+- ansible.builtin.include_role:
+    name: alex.preinstall.knownoshost
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.installdesktop
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.kde
+  when: 'prop_desktop == "kde"'
+
+- ansible.builtin.include_role:
+    name: alex.ms.desktop
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.installremotedesktop
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.installbrowser
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.installterminal
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.installfilemanager
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.installtexteditor

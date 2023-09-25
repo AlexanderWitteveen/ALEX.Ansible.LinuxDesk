@@ -9,7 +9,7 @@
     packages:
     - geany
     ansible_connection: ssh
-    ansible_host: "{{ args_text_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Install kate
@@ -21,7 +21,7 @@
     packages:
     - kate
     ansible_connection: ssh
-    ansible_host: "{{ args_text_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Install gedit
@@ -33,7 +33,7 @@
     packages:
     - gedit
     ansible_connection: ssh
-    ansible_host: "{{ args_text_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Install emacs
@@ -45,6 +45,6 @@
     packages:
     - emacs
     ansible_connection: ssh
-    ansible_host: "{{ args_text_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 

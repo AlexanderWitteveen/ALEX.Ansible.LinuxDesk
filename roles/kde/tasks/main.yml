@@ -9,7 +9,7 @@
     packages:
     - kde-plasma-desktop 
     ansible_connection: ssh
-    ansible_host: "{{ args_kde_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: KDE Powermanagement
@@ -21,29 +21,29 @@
     packages:
     - kde-plasma-desktop
     ansible_connection: ssh
-    ansible_host: "{{ args_kde_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Set Screenlock
   ansible.builtin.template:
     src: kscreenlockerrc.j2
-    dest: "/home/{{ args_kde_username }}/.config/kscreenlockerrc"
-    owner: "{{ args_kde_username }}"
-    group: "{{ args_kde_groupname }}"
+    dest: "/home/{{ prop_admin_username }}/.config/kscreenlockerrc"
+    owner: "{{ prop_admin_username }}"
+    group: "{{ prop_admin_groupname }}"
     mode: '0400'
   vars:
     ansible_connection: ssh
-    ansible_host: "{{ args_kde_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Set Powermanagement
   ansible.builtin.template:
     src: powermanagementprofilesrc.j2
-    dest: "/home/{{ args_kde_username }}/.config/powermanagementprofilesrc"
-    owner: "{{ args_kde_username }}"
-    group: "{{ args_kde_groupname }}"
+    dest: "/home/{{ prop_admin_username }}/.config/powermanagementprofilesrc"
+    owner: "{{ prop_admin_username }}"
+    group: "{{ prop_admin_groupname }}"
     mode: '0400'
   vars:
     ansible_connection: ssh
-    ansible_host: "{{ args_kde_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true

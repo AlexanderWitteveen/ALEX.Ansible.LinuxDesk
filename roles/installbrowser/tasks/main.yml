@@ -6,7 +6,7 @@
     state: present
   vars:
     ansible_connection: ssh
-    ansible_host: "{{ args_browser_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Add specified repository into sources list
@@ -15,7 +15,7 @@
     state: present
   vars:
     ansible_connection: ssh
-    ansible_host: "{{ args_browser_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Install Microsoft Edge
@@ -27,6 +27,6 @@
     packages:
     - microsoft-edge-stable 
     ansible_connection: ssh
-    ansible_host: "{{ args_browser_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 

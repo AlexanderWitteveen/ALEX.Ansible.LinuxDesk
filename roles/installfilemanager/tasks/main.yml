@@ -1,17 +1,5 @@
 ---
 
-- name: Install krusader file manager
-  apt:
-    name: "{{ packages }}"
-    state: present
-    update_cache: yes
-  vars:
-    packages:
-    - krusader 
-    ansible_connection: ssh
-    ansible_host: "{{ args_file_ipaddress }}"
-  become: true
-
 - name: Install Dolphin
   apt:
     name: "{{ packages }}"
@@ -21,7 +9,7 @@
     packages:
     - dolphin 
     ansible_connection: ssh
-    ansible_host: "{{ args_file_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Install Thunar
@@ -33,7 +21,7 @@
     packages:
     - thunar
     ansible_connection: ssh
-    ansible_host: "{{ args_file_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 

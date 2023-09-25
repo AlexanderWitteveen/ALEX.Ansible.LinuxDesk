@@ -9,7 +9,7 @@
     packages:
     - kitty 
     ansible_connection: ssh
-    ansible_host: "{{ args_terminal_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 # TODO Add config file for Kitty
@@ -25,7 +25,7 @@
     packages:
     - alacritty 
     ansible_connection: ssh
-    ansible_host: "{{ args_terminal_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 
@@ -42,7 +42,7 @@
     packages:
     - terminator 
     ansible_connection: ssh
-    ansible_host: "{{ args_terminal_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 

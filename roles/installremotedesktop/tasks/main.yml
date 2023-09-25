@@ -1,5 +1,7 @@
 ---
 
+## try tightvnc
+
 - name: Install xrdp
   apt:
     name: "{{ packages }}"
@@ -9,7 +11,7 @@
     packages:
     - xrdp 
     ansible_connection: ssh
-    ansible_host: "{{ args_remote_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Install remmina
@@ -21,6 +23,6 @@
     packages:
     - remmina 
     ansible_connection: ssh
-    ansible_host: "{{ args_remote_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 

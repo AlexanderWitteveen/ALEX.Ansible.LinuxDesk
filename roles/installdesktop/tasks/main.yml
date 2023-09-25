@@ -11,7 +11,7 @@
     packages:
     - task-cinnamon-desktop 
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Install xfce
@@ -24,7 +24,7 @@
     packages:
     - task-xfce-desktop 
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
 - name: Install gnome
@@ -37,6 +37,6 @@
     packages:
     - gnome-core 
     ansible_connection: ssh
-    ansible_host: "{{ args_desk_ipaddress }}"
+    ansible_host: "{{ prop_ipaddress }}"
   become: true
 
