@@ -1,14 +1,26 @@
 ---
 
 - ansible.builtin.include_role:
-    name: alex.preinstall.knownoshost
+    name: alex.base.knownoshost
 
-- ansible.builtin.include_role:
-    name: alex.linuxdesk.installdesktop
+#- ansible.builtin.include_role:
+#    name: alex.linuxdesk.installdesktop
 
 - ansible.builtin.include_role:
     name: alex.linuxdesk.kde
   when: 'prop_desktop == "kde"'
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.gnome
+  when: 'prop_desktop == "gnome"'
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.cinnamon
+  when: 'prop_desktop == "cinnamon"'
+
+- ansible.builtin.include_role:
+    name: alex.linuxdesk.xfce
+  when: 'prop_desktop == "xfce"'
 
 - ansible.builtin.include_role:
     name: alex.ms.desktop

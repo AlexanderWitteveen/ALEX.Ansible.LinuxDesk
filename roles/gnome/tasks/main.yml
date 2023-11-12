@@ -1,0 +1,83 @@
+---
+
+- name: Install gnome
+  apt:
+    name:
+      - gnome-core
+      - dconf-editor
+      - gnome-shell-extensions
+      - gnome-tweaks
+    state: present
+    update_cache: yes
+  vars:
+    ansible_connection: ssh
+    ansible_host: "{{ prop_ipaddress }}"
+  become: true
+
+#- name: Install gnome-extensions-cli
+#  community.general.pipx:
+#    name: 
+#      - gnome-extensions-cli
+#  vars:
+#    ansible_connection: ssh
+#    ansible_host: "{{ prop_ipaddress }}"
+#  become: true
+
+#- name: Install Dash-To-Panel extention
+#  shell: |
+#    gnome-extensions install /mnt/data04/sources/gnome/dash-to-panel/dash-to-paneljderose9.github.com.v59.shell-extension.zip --force    
+#  args:
+#    executable: /bin/bash
+#  vars:
+#    ansible_connection: ssh
+#    ansible_host: "{{ prop_ipaddress }}"
+#  become: true
+
+#- name: Configure
+#  shell: |
+#    dconf write /org/gnome/desktop/wm/preferences/button-layout "'appmenu:minimize,maximize,close'"
+#    dconf write /org/gnome/settings-deamon/plugins/power/sleep-inactive-ac-type "'nothing'"
+#  args:
+#    executable: /bin/bash
+#  vars:
+#    ansible_connection: ssh
+#    ansible_host: "{{ prop_ipaddress }}"
+#  become: true
+
+
+
+# - name: KDE Powermanagement
+#   apt:
+#     name: "{{ packages }}"
+#     state: present
+#     update_cache: yes
+#   vars:
+#     packages:
+#     - kde-plasma-desktop
+#     ansible_connection: ssh
+#     ansible_host: "{{ prop_ipaddress }}"
+#   become: true
+
+# - name: Set Screenlock
+#   ansible.builtin.template:
+#     src: kscreenlockerrc.j2
+#     dest: "/home/{{ prop_admin_username }}/.config/kscreenlockerrc"
+#     owner: "{{ prop_admin_username }}"
+#     group: "{{ prop_admin_groupname }}"
+#     mode: '0400'
+#   vars:
+#     ansible_connection: ssh
+#     ansible_host: "{{ prop_ipaddress }}"
+#   become: true
+
+# - name: Set Powermanagement
+#   ansible.builtin.template:
+#     src: powermanagementprofilesrc.j2
+#     dest: "/home/{{ prop_admin_username }}/.config/powermanagementprofilesrc"
+#     owner: "{{ prop_admin_username }}"
+#     group: "{{ prop_admin_groupname }}"
+#     mode: '0400'
+#   vars:
+#     ansible_connection: ssh
+#     ansible_host: "{{ prop_ipaddress }}"
+#   become: true
