@@ -23,7 +23,7 @@
     name: "{{ packages }}"
     state: present
     update_cache: yes
-  when: 'prop_desktopprop_arch == "x64"'
+  when: 'prop_arch == "x64"'
   vars:
     packages:
     - microsoft-edge-stable 
